@@ -1,4 +1,4 @@
 Media Query Generator
 =====================
 
-Created because I am lazy.
+Created because I am lazy. 

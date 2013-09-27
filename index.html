@@ -26,14 +26,15 @@ $(document).ready(function()
 $( document ).ready(function() {
     $('.min-btn').click(function(){
     $('.max').addClass('hideit');
+		$('.max p#fe_text').removeAttr('id');
 		$('.min').removeClass('hideit');
   });
 	$('.max-btn').click(function(){
+		$('.max p').attr('id', 'fe_text');
     $('.min').addClass('hideit');
 		$('.max').removeClass('hideit');
   });
 });
-
 
 
 
