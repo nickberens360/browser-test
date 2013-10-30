@@ -8,19 +8,15 @@
 <script src="js/jquery.js"></script>
 <script>
 function doSize(){
-$('#output_width').text($(window).width().toString());
-$('#output_height').val($(window).height().toString());
-$('#output_width1').text($(window).width().toString());
-$('#output_height1').val($(window).height().toString());
+var w =  $(window).width(); 
+var h =  $(window).height(); 
+$('#output_width').text(w);
+$('#output_width1').text(w);
+$('#output_height').text(h);
+$('#output_height1').text(h);
 }
 $(document).ready(doSize);
 $(window).resize(doSize);
-$(document).ready(function()
-{
- $(window).resize(function()
- {
- });
-});
 
 
 $( document ).ready(function() {
