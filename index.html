@@ -4,37 +4,9 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="chrome=1">
 <title>Media Query Generator</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="css/styles.css" />
-<script src="js/jquery.js"></script>
-<script>
-function doSize(){
-var w =  $(window).width(); 
-var h =  $(window).height(); 
-$('#output_width').text(w);
-$('#output_width1').text(w);
-$('#output_height').text(h);
-$('#output_height1').text(h);
-}
-$(document).ready(doSize);
-$(window).resize(doSize);
 
-
-$( document ).ready(function() {
-    $('.min-btn').click(function(){
-    $('.max').addClass('hideit');
-		$('.max p#fe_text').removeAttr('id');
-		$('.min').removeClass('hideit');
-  });
-	$('.max-btn').click(function(){
-		$('.max p').attr('id', 'fe_text');
-    $('.min').addClass('hideit');
-		$('.max').removeClass('hideit');
-  });
-});
-
-
-
-</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -46,17 +18,166 @@ $( document ).ready(function() {
 
 
 <div class="container">
+  <button id="d_clip_button" class="my_clip_button" title="Click me to copy to clipboard." data-clipboard-target="fe_text" data-clipboard-text="Default clipboard text from attribute"><b>Copy</b></button>
 	<div class="width">
-		<button id="d_clip_button" class="my_clip_button" title="Click me to copy to clipboard." data-clipboard-target="fe_text" data-clipboard-text="Default clipboard text from attribute"><b>Copy</b></button>
-		<div class="max">
-			<p id="fe_text">@media (max-width: <span id="output_width"></span>px){ }</p> <span class="change">  <span class="or">Change to</span> <a class="min-btn" href="#">min-width</a></span>
-		</div>
-		<div class="min hideit">
-			<p id="fe_text">@media (min-width: <span id="output_width1"></span>px){ }</p> <span class="change"> <span class="or">Change to</span> <a class="max-btn" href="#">max-width</a></span></span>
-		</div>
+		
+		<div class="max"><p id="fe_text">@media <span class="control-item"><span class="control" id="token">only</span><i class="trigger fa fa-chevron-down"></i></span> <span class="control-item"><span class="control" id="type">screen</span><i class="trigger fa fa-chevron-down"></i></span> ( <span class="control-item"><span class="control" id="min-max">max</span><i class="trigger fa fa-chevron-down"></i></span>-<span class="control-item"><span class="control" id="wh">width</span><i class="trigger fa fa-chevron-down"></i></span>: <span id="output"></span><span class="control-item"><span class="control" id="value">px</span><i class="trigger fa fa-chevron-down"></i></span> ){ }</p></div>
 	</div>
 </div>
+  
+  <span class="outputs" id="output_width"></span>
+  <span class="outputs" id="output_width_em"></span>
+  <span class="outputs" id="output_height"></span>
+  <span class="outputs" id="output_height_em"></span>
 
+  <ul id="option-min-max" class="options">
+    <li class="option" id="option-min">min</li>
+    <li class="option" id="option-max">max</li>
+    <li class="option-close"><i class="fa fa-times"></i></li>
+  </ul>
+
+  <ul id="option-wh" class="options">
+    <li class="option" id="option-width">width</li>
+    <li class="option" id="option-height">height</li>
+    <li class="option-close"><i class="fa fa-times"></i></li>
+  </ul>
+
+  <ul id="option-type" class="options">
+    <li class="option" id="option-screen">screen</li>
+    <li class="option" id="option-handheld">handheld</li>
+    <li class="option-close"><i class="fa fa-times"></i></li>
+  </ul>
+
+  <ul id="option-token" class="options">
+    <li class="option">only</li>
+    <li class="option">none</li>
+    <li class="option">not </li>
+    <li class="option-close"><i class="fa fa-times"></i></li>
+  </ul>
+
+  <ul id="option-value" class="options">
+    <li class="option" id="option-px">px</li>
+    <li class="option" id="option-em">em</li>
+    <!-- <li class="option-input">
+      <label>root font size</label>
+      <input type="text" class="formInput">
+    </li> -->
+    <li class="option-close"><i class="fa fa-times"></i></li>
+  </ul>
+
+<script src="js/jquery.js"></script>
+<script>
+
+
+function doSize(){
+  var w =  $(window).width(); 
+  var h =  $(window).height(); 
+  $('#output').text(w);
+  $('#output_width').text(w);
+  $('#output_width_em').text(w/16);
+  $('#output_height').text(h);
+  $('#output_height_em').text(h/16);
+}
+$(document).ready(doSize);
+$(window).resize(doSize);
+
+
+
+$('.trigger').click(function(){  
+
+  $('.width').css('color','rgba(255, 255, 255, 0.15)');
+
+  $(this).prev().css('color','white');
+  
+  $(this).parent().css('border-bottom','1px dotted white');
+
+
+  elId = $(this).prev().attr('id');
+
+  option = '#option-'+elId;
+
+  $(option).clone().appendTo('#'+elId).slideDown();
+
+});
+
+
+
+
+$('body').on('click', '.option', function() { 
+  selection = $(this).text();
+  $('.width').css('color','');
+  $('.control').css('color','');
+  $('.control-item').css('border-bottom','');
+  $(this).parent().parent().text(selection);
+  $('.control-item .options').remove();
+});
+$('body').on('click', '.option-close', function() { 
+  $('.width').css('color','');
+  $('.control').css('color','');
+  $('.control-item').css('border-bottom','');
+  $('.options').slideUp().delay(500)
+         .queue(function() {
+             $('.control-item .options').remove();
+             $(this).dequeue();
+         });
+});
+
+
+
+$('body').on('click', '#option-height', function() { 
+  valIs = $('#value').text();
+  if(valIs == 'px'){
+    $('#output').text($('#output_height').text());
+  }
+  else if(valIs == 'em'){
+    $('#output').text($('#output_height_em').text());
+  }
+});
+
+
+
+
+$('body').on('click', '#option-width', function() { 
+  valIs = $('#value').text();
+  if(valIs == 'px'){
+    $('#output').text($('#output_width').text());
+  }
+  else if(valIs == 'em'){
+    $('#output').text($('#output_width_em').text());
+  }
+});
+
+$('body').on('click', '#option-em', function() { 
+  whIs = $('#wh').text();
+  if(whIs == 'width'){
+    $('#output').text($('#output_width_em').text());
+  }
+  else if(whIs == 'height'){
+    $('#output').text($('#output_width_em').text());
+  }
+});
+
+$('body').on('click', '#option-px', function() { 
+  whIs = $('#wh').text();
+  if(whIs == 'width'){
+    $('#output').text($('#output_width').text());
+  }
+  else if(whIs == 'height'){
+    $('#output').text($('#output_height').text());
+  }
+});
+
+
+
+
+
+
+
+
+
+
+
+</script>
 <script type="text/javascript" src="js/ZeroClipboard.js"></script> 
 <script language="JavaScript">
 
