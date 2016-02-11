@@ -28,7 +28,7 @@ h1 {
 }*/
 .width {
 	text-align: center;
-	font-size: 46px;
+	font-size: 32px;
 	color: white;
 	width: 100%;
 	transition: color .25s;
@@ -46,6 +46,7 @@ button{
     font-size: 18px;
     margin: 50px auto;
     margin-top: 150px;
+    transition: all .25s;
 }
 button:active{
 	top:4px
@@ -104,6 +105,10 @@ p{
 	font-size: .6em;
     top: 102%;
     padding-top: 20px;
+    min-width: 125px;
+    text-align: left;
+    overflow: auto !important;
+    max-height: 200px;
 }
 .option{
 	cursor: pointer;
@@ -128,7 +133,7 @@ p{
     cursor: pointer;
 }
 .option-close{
-	text-align:center;
+	//text-align:center;
 	position: relative;
     top: 5px;
     cursor: pointer;

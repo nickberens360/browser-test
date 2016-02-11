@@ -31,8 +31,64 @@
   <span class="outputs" id="output_height_em"></span>
 
   <ul id="option-min-max" class="options">
-    <li class="option" id="option-min">min</li>
-    <li class="option" id="option-max">max</li>
+    <li class="option">none</li>
+    <!-- <optgroup label="Common"> -->
+    <li class="option">width</li>
+    <li class="option">min-width</li>
+    <li class="option">max-width</li>
+    <li class="option">height</li>
+    <li class="option">min-height</li>
+    <li class="option">max-height</li>
+    <li class="option">device-width</li>
+    <li class="option">min-device-width</li>
+    <li class="option">max-device-width</li>
+    <li class="option">device-height</li>
+    <li class="option">min-device-height</li>
+    <li class="option">max-device-height</li>
+    <li class="option">orientation</li>
+
+    <!-- <optgroup label="Resolution"> -->
+    <li class="option">resolution</li>
+    <li class="option">min-resolution</li>
+    <li class="option">max-resolution</li>
+
+    <!-- <optgroup label="Pixel ratio"> -->
+    <li class="option">device-pixel-ratio</li>
+    <li class="option">min-device-pixel-ratio</li>
+    <li class="option">max-device-pixel-ratio</li>
+    <li class="option">-o-device-pixel-ratio</li>
+    <li class="option">-o-min-device-pixel-ratio</li>
+    <li class="option">-o-max-device-pixel-ratio</li>
+    <li class="option">-webkit-device-pixel-ratio</li>
+    <li class="option">-webkit-min-device-pixel-ratio</li>
+    <li class="option">-webkit-max-device-pixel-ratio</li>
+    <li class="option">-moz-device-pixel-ratio</li>
+    <li class="option">-moz-min-device-pixel-ratio</li>
+    <li class="option">-moz-max-device-pixel-ratio</li>
+   
+    <!-- <optgroup label="Aspect ratio"> -->
+    <li class="option">aspect-ratio</li>
+    <li class="option">min-aspect-ratio</li>
+    <li class="option">max-aspect-ratio</li>
+    <li class="option">device-aspect-ratio</li>
+    <li class="option">min-device-aspect-ratio</li>
+    <li class="option">max-device-aspect-ratio</li>
+    
+    <!-- <optgroup label="Colors"> -->
+    <li class="option">color</li>
+    <li class="option">min-color</li>
+    <li class="option">max-color</li>
+    <li class="option">color-index</li>
+    <li class="option">min-color-index</li>
+    <li class="option">max-color-index</li>
+    <li class="option">monochrome</li>
+    <li class="option">min-monochrome</li>
+    <li class="option">max-monochrome</li>
+   
+    <!-- <optgroup label="Weird stuff"> -->
+    <li class="option">scan</li>
+    <li class="option">grid</li>
+    
     <li class="option-close"><i class="fa fa-times"></i></li>
   </ul>
 
@@ -43,8 +99,16 @@
   </ul>
 
   <ul id="option-type" class="options">
-    <li class="option" id="option-screen">screen</li>
-    <li class="option" id="option-handheld">handheld</li>
+    <li class="option">all</li>
+    <li class="option">screen</li>
+    <li class="option">braille</li>
+    <li class="option">embossed</li>
+    <li class="option">handheld</li>
+    <li class="option">print</li>
+    <li class="option">projection</li>
+    <li class="option">speech</li>
+    <li class="option">tty</li>
+    <li class="option">tv</li>
     <li class="option-close"><i class="fa fa-times"></i></li>
   </ul>
 
@@ -87,6 +151,8 @@ $('.trigger').click(function(){
 
   $('.width').css('color','rgba(255, 255, 255, 0.15)');
 
+  $('.my_clip_button').css('opacity','.15');
+
   $(this).prev().css('color','white');
   
   $(this).parent().css('border-bottom','1px dotted white');
@@ -108,6 +174,7 @@ $('body').on('click', '.option', function() {
   $('.width').css('color','');
   $('.control').css('color','');
   $('.control-item').css('border-bottom','');
+  $('.my_clip_button').css('opacity','');
   $(this).parent().parent().text(selection);
   $('.control-item .options').remove();
 });
@@ -115,6 +182,7 @@ $('body').on('click', '.option-close', function() {
   $('.width').css('color','');
   $('.control').css('color','');
   $('.control-item').css('border-bottom','');
+  $('.my_clip_button').css('opacity','');
   $('.options').slideUp().delay(500)
          .queue(function() {
              $('.control-item .options').remove();
@@ -153,7 +221,7 @@ $('body').on('click', '#option-em', function() {
     $('#output').text($('#output_width_em').text());
   }
   else if(whIs == 'height'){
-    $('#output').text($('#output_width_em').text());
+    $('#output').text($('#output_height_em').text());
   }
 });
 
