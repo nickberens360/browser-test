@@ -107,8 +107,8 @@ p{
     padding-top: 20px;
     min-width: 125px;
     text-align: left;
-    overflow: auto !important;
-    max-height: 200px;
+    //overflow: auto !important;
+    //max-height: 200px;
 }
 .option{
 	cursor: pointer;

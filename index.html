@@ -21,7 +21,7 @@
   <button id="d_clip_button" class="my_clip_button" title="Click me to copy to clipboard." data-clipboard-target="fe_text" data-clipboard-text="Default clipboard text from attribute"><b>Copy</b></button>
 	<div class="width">
 		
-		<div class="max"><p id="fe_text">@media <span class="control-item"><span class="control" id="token">only</span><i class="trigger fa fa-chevron-down"></i></span> <span class="control-item"><span class="control" id="type">screen</span><i class="trigger fa fa-chevron-down"></i></span> <span class="control-item"><span class="control" id="">and</span></span> ( <span class="control-item"><span class="control" id="wh">max-width</span><i class="trigger fa fa-chevron-down"></i></span>: <span id="output"></span><span class="control-item"><span class="control" id="value">px</span><i class="trigger fa fa-chevron-down"></i></span> ){ }</p></div>
+		<div class="max"><p id="fe_text">@media <span class="control-item"><span class="control" id="token">only</span><i class="trigger fa fa-chevron-down"></i></span> <span class="control-item"><span class="control" id="type">screen</span><i class="trigger fa fa-chevron-down"></i></span> <span class=""><span class="control" id="">and</span></span> ( <span class="control-item"><span class="control" id="wh">max-width</span><i class="trigger fa fa-chevron-down"></i></span>: <span id="output"></span><span class="control-item"><span class="control" id="value">px</span><i class="trigger fa fa-chevron-down"></i></span> ){ }</p></div>
 	</div>
 </div>
   
@@ -45,15 +45,15 @@
     <li class="option">device-height</li>
     <li class="option">min-device-height</li>
     <li class="option">max-device-height</li>
-    <li class="option">orientation</li>
+    <!-- <li class="option">orientation</li> -->
 
     <!-- <optgroup label="Resolution"> -->
-    <li class="option">resolution</li>
+    <!-- <li class="option">resolution</li>
     <li class="option">min-resolution</li>
-    <li class="option">max-resolution</li>
+    <li class="option">max-resolution</li> -->
 
     <!-- <optgroup label="Pixel ratio"> -->
-    <li class="option">device-pixel-ratio</li>
+    <!-- <li class="option">device-pixel-ratio</li>
     <li class="option">min-device-pixel-ratio</li>
     <li class="option">max-device-pixel-ratio</li>
     <li class="option">-o-device-pixel-ratio</li>
@@ -64,18 +64,18 @@
     <li class="option">-webkit-max-device-pixel-ratio</li>
     <li class="option">-moz-device-pixel-ratio</li>
     <li class="option">-moz-min-device-pixel-ratio</li>
-    <li class="option">-moz-max-device-pixel-ratio</li>
+    <li class="option">-moz-max-device-pixel-ratio</li> -->
    
     <!-- <optgroup label="Aspect ratio"> -->
-    <li class="option">aspect-ratio</li>
+    <!-- <li class="option">aspect-ratio</li>
     <li class="option">min-aspect-ratio</li>
     <li class="option">max-aspect-ratio</li>
     <li class="option">device-aspect-ratio</li>
     <li class="option">min-device-aspect-ratio</li>
-    <li class="option">max-device-aspect-ratio</li>
+    <li class="option">max-device-aspect-ratio</li> -->
     
     <!-- <optgroup label="Colors"> -->
-    <li class="option">color</li>
+    <!-- <li class="option">color</li>
     <li class="option">min-color</li>
     <li class="option">max-color</li>
     <li class="option">color-index</li>
@@ -83,11 +83,11 @@
     <li class="option">max-color-index</li>
     <li class="option">monochrome</li>
     <li class="option">min-monochrome</li>
-    <li class="option">max-monochrome</li>
+    <li class="option">max-monochrome</li> -->
    
     <!-- <optgroup label="Weird stuff"> -->
-    <li class="option">scan</li>
-    <li class="option">grid</li>
+    <!-- <li class="option">scan</li>
+    <li class="option">grid</li> -->
     
     <li class="option-close"><i class="fa fa-times"></i></li>
   </ul>
@@ -132,17 +132,34 @@
 <script src="js/jquery.js"></script>
 <script>
 
-
-function doSize(){
+function doSizeReady(){
   var w =  $(window).width(); 
   var h =  $(window).height(); 
+
   $('#output').text(w);
   $('#output_width').text(w);
   $('#output_width_em').text(w/16);
   $('#output_height').text(h);
   $('#output_height_em').text(h/16);
+  
 }
-$(document).ready(doSize);
+
+
+
+function doSize(){
+  var w =  $(window).width(); 
+  var h =  $(window).height(); 
+  
+  $('#output').text(w);
+  $('#output_width').text(w);
+  $('#output_width_em').text(w/16);
+  $('#output_height').text(h);
+  $('#output_height_em').text(h/16);
+
+
+
+}
+$(document).ready(doSizeReady);
 $(window).resize(doSize);
 
 
@@ -162,7 +179,11 @@ $('.trigger').click(function(){
 
   option = '#option-'+elId;
 
+  //$('.options').slideUp().delay(500);
+
   $(option).clone().appendTo('#'+elId).slideDown();
+
+
 
 });
 
@@ -192,7 +213,8 @@ $('body').on('click', '.option-close', function() {
 
 
 
-$('body').on('click', '#option-height', function() { 
+
+/*$('body').on('click', '#option-height', function() { 
   valIs = $('#value').text();
   if(valIs == 'px'){
     $('#output').text($('#output_height').text());
@@ -200,12 +222,66 @@ $('body').on('click', '#option-height', function() {
   else if(valIs == 'em'){
     $('#output').text($('#output_height_em').text());
   }
+});*/
+
+
+
+$('body').on('click', '#option-wh .option', function() { 
+
+  whIs = $(this).text();
+
+  var str1 = whIs;
+  var str2 = "height";
+  var str3  = "width";
+
+  if(str1.indexOf(str2) != -1){
+    valIs = $('#value').text();
+    if(valIs == 'px'){
+      $('#output').text($('#output_height').text());
+      $( window ).resize(function() {
+         $('#output').text($('#output_height').text());
+      });
+    }
+    else if(valIs == 'em'){
+      $('#output').text($('#output_height_em').text());
+      $( window ).resize(function() {
+         $('#output').text($('#output_height_em').text());
+      });
+    }
+  }
+  else if(str1.indexOf(str3) != -1){
+    valIs = $('#value').text();
+    if(valIs == 'px'){
+      $('#output').text($('#output_width').text());
+      $( window ).resize(function() {
+         $('#output').text($('#output_width').text());
+      });
+    }
+    else if(valIs == 'em'){
+      $('#output').text($('#output_width_em').text());
+      $( window ).resize(function() {
+         $('#output').text($('#output_width_em').text());
+      });
+    }
+  }
+
 });
 
 
 
+/*$('body').on('click', '#option-height', function() { 
+  valIs = $('#value').text();
+  if(valIs == 'px'){
+    $('#output').text($('#output_height').text());
+  }
+  else if(valIs == 'em'){
+    $('#output').text($('#output_height_em').text());
+  }
+});*/
 
-$('body').on('click', '#option-width', function() { 
+
+
+/*$('body').on('click', '#option-width', function() { 
   valIs = $('#value').text();
   if(valIs == 'px'){
     $('#output').text($('#output_width').text());
@@ -213,8 +289,71 @@ $('body').on('click', '#option-width', function() {
   else if(valIs == 'em'){
     $('#output').text($('#output_width_em').text());
   }
+});*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+$('body').on('click', '#option-em', function() { 
+
+  whIs = $('#wh').text();
+
+  var str1 = whIs;
+  var str2 = "height";
+
+  if(str1.indexOf(str2) != -1){
+    $('#output').text($('#output_height_em').text());
+    $( window ).resize(function() {
+       $('#output').text($('#output_height_em').text());
+    });
+  }
+  else{
+    $('#output').text($('#output_width_em').text());
+    $( window ).resize(function() {
+       $('#output').text($('#output_width_em').text());
+    });
+  }
+
 });
 
+
+
+
+$('body').on('click', '#option-px', function() { 
+
+  whIs = $('#wh').text();
+
+  var str1 = whIs;
+  var str2 = "height";
+
+  if(str1.indexOf(str2) != -1){
+    $('#output').text($('#output_height').text());
+    $( window ).resize(function() {
+       $('#output').text($('#output_height').text());
+    });
+  }
+  else{
+    $('#output').text($('#output_width').text());
+    $( window ).resize(function() {
+       $('#output').text($('#output_width').text());
+    });
+  }
+
+});
+
+
+
+/*
+original
 $('body').on('click', '#option-em', function() { 
   whIs = $('#wh').text();
   if(whIs == 'width'){
@@ -223,17 +362,11 @@ $('body').on('click', '#option-em', function() {
   else if(whIs == 'height'){
     $('#output').text($('#output_height_em').text());
   }
-});
+});*/
 
-$('body').on('click', '#option-px', function() { 
-  whIs = $('#wh').text();
-  if(whIs == 'width'){
-    $('#output').text($('#output_width').text());
-  }
-  else if(whIs == 'height'){
-    $('#output').text($('#output_height').text());
-  }
-});
+
+
+
 
 
 
