@@ -28,11 +28,51 @@ h1 {
 }*/
 .width {
 	text-align: center;
-	font-size: 32px;
+	//font-size: 32px;
 	color: white;
 	width: 100%;
 	transition: color .25s;
 }
+
+.options__wrap{
+	max-height:200px;
+	overflow: scroll;
+}
+
+#fe_text{
+	font-size:48px;
+}
+
+@media (max-width: 1296px){ 
+	#fe_text{
+		font-size:36px;
+	}
+}
+@media (max-width: 960px){ 
+	#fe_text{
+		font-size:28px;
+	}
+}
+@media (max-width: 800px){ 
+	#fe_text{
+		font-size:20px;
+	}
+}
+@media (max-width: 535px){ 
+	#fe_text{
+		font-size:16px;
+	}
+}
+@media (max-width: 375px){ 
+	#fe_text{
+		font-size:12px;
+	}
+}
+
+
+
+
+
 button{
 	//position: absolute;
     left:0;
@@ -54,7 +94,7 @@ button:active{
 @media (max-width: 449px) {
 	p {
 		padding-left:0;
-		font-size:18px;
+		//font-size:18px;
 	}
 }
 
