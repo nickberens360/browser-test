@@ -47,6 +47,7 @@ h1 {
 .options__wrap{
 	max-height:200px;
 	overflow: auto;
+  width:400px;
 }
 
 #fe_text{
